@@ -6,6 +6,4 @@ or if a word begins with a vowel, you just add “way” to the end.
 
 ## Preview
 
-![tictactoe screen](https://user-images.githubusercontent.com/68619107/160295732-50af9d3e-9b9f-47b8-8121-fca6e418bdd1.png)
-
 
