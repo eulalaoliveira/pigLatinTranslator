@@ -6,4 +6,4 @@ or if a word begins with a vowel, you just add “way” to the end.
 
 ## Preview
 
-
+![pigLatin screenshot](pigLatin.png)
