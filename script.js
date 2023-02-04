@@ -1,74 +1,53 @@
 function translate(str) {
-    //error if empty field
+    //verification to check if its empty
     if (str == "") {
-        return "Please enter a valide word."
+        return "Please enter a word."
     }
     
-    //create arrays for tracking true vowels and punctuation
+    //create arrays for tracking vowels upper and lower letter
     var vowels = ["a","e","i","o","u","A","E","I","O","U"];
-    var punc = [".","?","!",",","\"","'"];
     
     //split the sentence into an array of words
     var sentence = str.split(/(?=[!?.,])|[_-\s]/).filter(x => x);
     var result = [];
     
-    //iterate through sentence array and translate each word
+    //to work in a sentece array and tranlate each word
+    //while the incremente is less than sentece size it works
     for (let i = 0; i < sentence.length; i++) {
     
       //split the current word by first vowel
         var arr = sentence[i].split(/([aeiouAEIOUyY])/).filter(x => x);
         var firstLetter = "";
         
-      //set switch case based on first letters
-        if (/[^a-zA-Z]/.test(arr[0])) {
-            firstLetter = "punc";
-        } else if (/[yY]/.test(arr)) {
-            firstLetter = "y";
-        } else if (vowels.indexOf(arr[0]) != -1) {
+        if (vowels.indexOf(arr[0]) != -1) {
             firstLetter = "vowel";
         }
         
-      //switch statement for handling different word starts
+        //switch statement to add the sufix ya and way
         switch (firstLetter) {
-        case 'punc':
-          //do nothing to avoid appending suffix to special characters
-        break;
-        case 'y':
-        if (/[aeiouAEIOU]/.test(arr)) {
-            while (vowels.indexOf(arr[0].charAt(0)) == -1) {
-            arr.push(arr.shift().toLowerCase());
+          case 'vowel':
+            if (vowels) {
+            arr.push("way"); 
             }
-            arr.push('ay');
-        } else {
+          break;
+          default:
+          //.shift method returns the first element of the array, then transforme to lower case and .push to add this element in the end + add sufix ay
             arr.push(arr.shift().toLowerCase());
             arr.push('ay');
-        }
-        break;
-        case 'vowel':
-        if (/[yY]/.test(arr[arr.length-1])) {
-        arr.push("ay");
-        } else {
-        arr.push("way"); 
-        }
-        break;
-        default:
-        arr.push(arr.shift().toLowerCase());
-        arr.push('ay');
-        break;
-    }
+          break;
+      }
 
       //output arr of strings
     result.push(arr.join(''));
     }
     
-    //return final string with spaces before punctuation removed
-    return result.join(" ").replace(/\s([?.!,])/gi, '$1');
+    //return final string with spaces
+    return result.join(" ");
     }
 
     //Button Control
-    var tButton = document.getElementById('tButton');
-    tButton.onclick = function () {
+    var translateBtn = document.getElementById('translateBtn');
+    translateBtn.onclick = function () {
     var inputText = document.getElementById('inputText').value;
     var outputText = document.getElementById('outputText').value = translate(inputText);
 };
-
