@@ -5,18 +5,20 @@ function translate(str) {
     }
     
     //create arrays for tracking vowels upper and lower letter
-    var vowels = ["a","e","i","o","u","A","E","I","O","U"];
+    var vowels = ["a","e","i","o","u"];
     
+    //all letters to lowerCase in case the user type some upperCase vowel
     //split the sentence into an array of words
-    var sentence = str.split(/(?=[!?.,])|[_-\s]/).filter(x => x);
+    var word = str.toLowerCase();
+    var sentence = word.split(/(?=[!?.,])|[_-\s]/).filter(x => x);
     var result = [];
     
-    //to work in a sentece array and tranlate each word
+    //to work in sentece array and translate each word
     //while the incremente is less than sentece size it works
     for (let i = 0; i < sentence.length; i++) {
     
       //split the current word by first vowel
-        var arr = sentence[i].split(/([aeiouAEIOUyY])/).filter(x => x);
+        var arr = sentence[i].split(/([aeiou])/).filter(x => x);
         var firstLetter = "";
         
         if (vowels.indexOf(arr[0]) != -1) {
@@ -32,7 +34,7 @@ function translate(str) {
           break;
           default:
           //.shift method returns the first element of the array, then transforme to lower case and .push to add this element in the end + add sufix ay
-            arr.push(arr.shift().toLowerCase());
+            arr.push(arr.shift());
             arr.push('ay');
           break;
       }
